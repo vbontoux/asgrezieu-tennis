@@ -4,58 +4,15 @@ import ScrollReveal from '../../components/animations/ScrollReveal.astro';
 
 const locale = 'fr';
 
-const coachs = [
-  { name: 'BIDON Cédric', role: 'Coach', diplome: 'DEJEPS' },
-  { name: 'PASSOT Olivier', role: 'Coach', diplome: 'DEJEPS' },
-  { name: 'HUNAULT Clément', role: 'Coach', diplome: 'CQP' },
-  { name: 'LAGARDE Michael', role: 'Coach', diplome: '' },
-];
+// Lecture du planning depuis le fichier Markdown géré par Tina CMS
+const entrainementsModules = import.meta.glob('../../../content/entrainements/fr.md', { eager: true });
+const data = (Object.values(entrainementsModules)[0] as any)?.frontmatter ?? { coachs: [], planning: [] };
+const coachs = (data.coachs ?? []).map((c: any) => ({ name: c.nom, role: 'Coach', diplome: c.diplome }));
 
-const planning = {
-  lundi: [
-    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Cédric' },
-    { time: '16H45 - 18H', label: '8/10 ANS', coach: 'Cédric' },
-    { time: '18H - 19H', label: 'ADULTES DÉBUTANT', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'JEUNES', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'DAMES (CCVL)', coach: 'Olivier' },
-    { time: '20H30 - 22H', label: 'DAMES', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'DAMES (CCVL)', coach: 'Olivier' },
-  ],
-  mardi: [
-    { time: '17H30 - 19H', label: '11/13 ANS (NC à 30/4)', coach: 'Olivier' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Olivier' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Olivier' },
-  ],
-  mercredi: [
-    { time: '13H - 14H30', label: '2015-2019', coach: 'Cédric et Olivier' },
-    { time: '14H30 - 16H', label: '2013-2016', coach: 'Cédric et Olivier' },
-    { time: '16H - 17H30', label: '2011-2014', coach: 'Cédric et Olivier' },
-    { time: '17H30 - 19H', label: '2008-2012', coach: 'Cédric et Olivier' },
-    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric et Olivier' },
-  ],
-  jeudi: [
-    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Olivier' },
-    { time: '17H30 - 19H', label: '13/16 ANS (40 à 30/4)', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'ADULTES MIXTE', coach: 'Cédric' },
-  ],
-  vendredi: [
-    { time: '17H30 - 19H', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '20H30 - 21H30', label: 'ADULTES MIXTE', coach: 'Olivier' },
-  ],
-  samedi: [
-    { time: '9H - 10H30', label: '2015-2019', coach: 'Cédric et Michael' },
-    { time: '10H30 - 12H', label: '2012-2016', coach: 'Cédric et Michael' },
-    { time: '12H - 13H30', label: '2008-2011', coach: 'Cédric et Michael' },
-    { time: '9H - 10H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-    { time: '10H - 11H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-    { time: '11H - 12H15', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-  ],
-};
+// Conversion du tableau planning[] en objet { jour: creneaux[] }
+const planningMap = Object.fromEntries(
+  (data.planning ?? []).map((p: any) => [p.jour, p.creneaux ?? []])
+);
 
 const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] as const;
 const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi: 'JEUDI', vendredi: 'VENDREDI', samedi: 'SAMEDI' };
@@ -78,7 +35,7 @@ const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi:
           </div>
         </ScrollReveal>
         <div class="coachs-grid">
-          {coachs.map((coach, i) => (
+          {coachs.map((coach: any, i: number) => (
             <ScrollReveal animation="scale-in" delay={((i + 1) as 1 | 2 | 3 | 4)}>
               <div class="coach-card card-hover">
                 <h2 class="coach-name">{coach.name}</h2>
@@ -107,7 +64,7 @@ const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi:
               <div class="day-column">
                 <h3 class="day-title">{dayLabels[day]}</h3>
                 <div class="slots">
-                  {planning[day].map(slot => (
+                  {(planningMap[day] ?? []).map((slot: any) => (
                     <div class:list={['slot-card', { 'slot-alt': (slot as any).alt }]}>
                       <span class="slot-time">{slot.time}</span>
                       <span class="slot-label">{slot.label}</span>

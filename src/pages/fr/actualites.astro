@@ -4,6 +4,12 @@ import ScrollReveal from '../../components/animations/ScrollReveal.astro';
 import { asset } from '../../i18n/utils';
 
 const locale = 'fr';
+
+const actuModules = import.meta.glob('../../../content/actualites/fr/*.md', { eager: true });
+const actus = (Object.values(actuModules) as any[])
+  .map(a => a.frontmatter)
+  .filter((a: any) => a.publie !== false);
+const heroActu = actus[0];
 ---
 
 <BaseLayout
@@ -13,23 +19,27 @@ const locale = 'fr';
   currentPath="/fr/actualites"
 >
   <!-- Hero Tournoi — plein écran, engageant -->
+  {heroActu && (
   <section class="tournoi-hero">
     <div class="tournoi-bg">
-      <img src={asset('/images/hero-courts.jpg')} alt="" aria-hidden="true" />
+      <img src={asset(heroActu.image ?? '/images/hero-courts.jpg')} alt="" aria-hidden="true" />
     </div>
     <div class="tournoi-overlay"></div>
     <div class="tournoi-content">
       <ScrollReveal animation="fade-in">
-        <span class="tournoi-tag">🎾 Événement</span>
-        <h1>Tournoi Open</h1>
-        <p class="tournoi-dates">Du 2 au 25 avril 2025</p>
-        <p class="tournoi-desc">Que vous soyez compétiteur ou amateur, venez vous challenger sur les courts dans une ambiance conviviale !</p>
-        <a href="https://tenup.fft.fr/tournoi/189908" target="_blank" rel="noopener noreferrer" class="tournoi-btn">
-          S'inscrire sur Ten'Up →
-        </a>
+        {heroActu.tag && <span class="tournoi-tag">{heroActu.tag}</span>}
+        <h1>{heroActu.titre}</h1>
+        {heroActu.dates && <p class="tournoi-dates">{heroActu.dates}</p>}
+        {heroActu.description && <p class="tournoi-desc">{heroActu.description}</p>}
+        {heroActu.lien && (
+          <a href={heroActu.lien} target="_blank" rel="noopener noreferrer" class="tournoi-btn">
+            {heroActu.lienLabel ?? 'En savoir plus →'}
+          </a>
+        )}
       </ScrollReveal>
     </div>
   </section>
+  )}
 
   <!-- Section Location -->
   <section class="location-section">

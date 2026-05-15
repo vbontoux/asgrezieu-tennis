@@ -5,13 +5,10 @@ import { asset } from '../../i18n/utils';
 
 const locale = 'fr';
 
-const sponsors = [
-  { logo: asset('/images/sponsors/sponsor-1.jpg'), alt: 'Sandra Viricel Immobilier', url: 'https://www.sandraviricel.com' },
-  { logo: asset('/images/sponsors/sponsor-2.png'), alt: 'MK Magnetik Enseignes', url: 'https://www.magnetik-enseignes.com/' },
-  { logo: asset('/images/sponsors/sponsor-3.png'), alt: 'Toane Restaurant', url: 'https://www.toane.com' },
-  { logo: asset('/images/sponsors/sponsor-4.png'), alt: 'Evideence Créateur d\'événements', url: 'https://www.evideence.fr' },
-  { logo: asset('/images/sponsors/sponsor-5.avif'), alt: 'Robino Pizza', url: 'https://www.robino-cafe-pizza.com/' },
-];
+const sponsorModules = import.meta.glob('../../../content/sponsors/*.md', { eager: true });
+const sponsors = (Object.values(sponsorModules) as any[])
+  .map(s => ({ logo: asset(s.frontmatter.logo), alt: s.frontmatter.nom, url: s.frontmatter.url, ordre: s.frontmatter.ordre }))
+  .sort((a: any, b: any) => (a.ordre ?? 99) - (b.ordre ?? 99));
 ---
 
 <BaseLayout

@@ -5,30 +5,15 @@ import { asset } from '../../i18n/utils';
 
 const locale = 'fr';
 
-const direction = [
-  { name: 'BONTOUX\nRomain', role: 'Président', email: 'romain.bontoux@asgrezieutennis.com', photo: asset('/images/board/romain-bontoux.jpg') },
-  { name: 'JACOUTON\nCyril', role: 'Vice-Président', email: 'cyril.jacouton@asgrezieutennis.com', photo: asset('/images/board/cyril-jacouton.jpg') },
-];
+// Lecture des membres depuis les fichiers Markdown gérés par Tina CMS
+const modules = import.meta.glob('../../../content/conseil/*.md', { eager: true });
+const sorted = (Object.values(modules) as any[])
+  .map(m => m.frontmatter)
+  .sort((a: any, b: any) => (a.ordre ?? 99) - (b.ordre ?? 99));
 
-const bureauAutres = [
-  { name: 'QUINTANA\nSylvie', role: 'Trésorière', email: 'sylvie.quintana@asgrezieutennis.com', photo: asset('/images/board/sylvie-quintana.jpg') },
-  { name: 'SIMARD\nThierry', role: 'Trésorier Adjoint', email: 'thierry.simard@asgrezieutennis.com', photo: asset('/images/board/thierry-simard.jpg') },
-  { name: 'HAUMONT\nNathalie', role: 'Secrétaire', email: 'nathalie.haumont@asgrezieutennis.com', photo: asset('/images/board/nathalie-haumont.jpg') },
-  { name: 'BOURDEAU\nFranck', role: 'Secrétaire Adjoint', email: 'franck.bourdeau@asgrezieutennis.com', photo: asset('/images/board/franck-bourdeau.jpg') },
-];
-
-const membres = [
-  { name: 'BONTOUX\nAndéol', role: 'Communication', email: 'andeol.bontoux@asgrezieutennis.com', photo: asset('/images/board/andeol-bontoux.jpg') },
-  { name: 'LOCATELLI\nLou', role: 'Communication', email: 'lou.locatelli@asgrezieutennis.com', photo: asset('/images/board/lou-locatelli.jpg') },
-  { name: 'LAGARDE\nPatrice', role: 'Sponsors', email: 'patrice.lagarde@asgrezieutennis.com', photo: asset('/images/board/patrice-lagarde.jpg') },
-  { name: 'LEBAYLE\nFlorent', role: 'Sponsors', email: 'florent.lebayle@asgrezieutennis.com', photo: asset('/images/board/florent-lebayle.jpg') },
-  { name: 'REY\nMuriel', role: 'Responsable équipes femmes', email: 'muriel.rey@asgrezieutennis.com', photo: asset('/images/board/muriel-rey.jpg') },
-  { name: 'GALMICHE\nCédric', role: 'Responsable équipes hommes', email: 'cedric.galmiche@asgrezieutennis.com', photo: asset('/images/board/cedric-galmiche.jpg') },
-  { name: 'BRILLANT\nArnaud', role: 'Relation Mairie', email: 'arnaud.brillant@asgrezieutennis.com', photo: asset('/images/board/arnaud-brillant.jpg') },
-  { name: 'COCCONCELLI\nDenis', role: 'Goal volant', email: 'denis.cocconcelli@asgrezieutennis.com', photo: asset('/images/board/denis-cocconcelli.jpg') },
-  { name: 'HUNAULT\nFabien', role: 'Commission Tournoi', email: 'fabien.hunault@asgrezieutennis.com', photo: asset('/images/board/fabien-hunault.jpg') },
-  { name: 'VADUREL\nFrancis', role: 'Responsable Informatique', email: 'francis.vadurel@asgrezieutennis.com', photo: asset('/images/board/francis-vadurel.jpg') },
-];
+const direction   = sorted.filter(m => m.categorie === 'direction');
+const bureauAutres = sorted.filter(m => m.categorie === 'bureau');
+const membres     = sorted.filter(m => m.categorie === 'membre');
 ---
 
 <BaseLayout
@@ -54,9 +39,9 @@ const membres = [
             <ScrollReveal animation="scale-in" delay={((i + 1) as 1 | 2)}>
               <article class="member-card card-hover">
                 <div class="photo-wrapper">
-                  <img src={member.photo} alt={`Photo de ${member.name.replace('\n', ' ')}`} width="200" height="200" loading="lazy" />
+                  <img src={asset(member.photo)} alt={`Photo de ${member.prenom} ${member.nom}`} width="200" height="200" loading="lazy" />
                 </div>
-                <h2 class="member-name" set:html={member.name.replace('\n', '<br/>')} />
+                <h2 class="member-name">{member.nom}<br/>{member.prenom}</h2>
                 <p class="member-role">{member.role}</p>
                 <a href={`mailto:${member.email}`} class="member-email">{member.email}</a>
               </article>
@@ -70,9 +55,9 @@ const membres = [
             <ScrollReveal animation="scale-in" delay={((i % 4 + 1) as 1 | 2 | 3 | 4)}>
               <article class="member-card card-hover">
                 <div class="photo-wrapper">
-                  <img src={member.photo} alt={`Photo de ${member.name.replace('\n', ' ')}`} width="200" height="200" loading="lazy" />
+                  <img src={asset(member.photo)} alt={`Photo de ${member.prenom} ${member.nom}`} width="200" height="200" loading="lazy" />
                 </div>
-                <h2 class="member-name" set:html={member.name.replace('\n', '<br/>')} />
+                <h2 class="member-name">{member.nom}<br/>{member.prenom}</h2>
                 <p class="member-role">{member.role}</p>
                 <a href={`mailto:${member.email}`} class="member-email">{member.email}</a>
               </article>
@@ -97,9 +82,9 @@ const membres = [
             <ScrollReveal animation="scale-in" delay={((i % 4 + 1) as 1 | 2 | 3 | 4)}>
               <article class="member-card card-hover">
                 <div class="photo-wrapper">
-                  <img src={member.photo} alt={`Photo de ${member.name.replace('\n', ' ')}`} width="200" height="200" loading="lazy" />
+                  <img src={asset(member.photo)} alt={`Photo de ${member.prenom} ${member.nom}`} width="200" height="200" loading="lazy" />
                 </div>
-                <h3 class="member-name" set:html={member.name.replace('\n', '<br/>')} />
+                <h3 class="member-name">{member.nom}<br/>{member.prenom}</h3>
                 <p class="member-role">{member.role}</p>
                 <a href={`mailto:${member.email}`} class="member-email">{member.email}</a>
               </article>

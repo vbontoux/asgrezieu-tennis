@@ -1,18 +1,42 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../components/animations/ScrollReveal.astro';
-import { getTranslation } from '../../i18n/utils';
+import { getTranslation, asset } from '../../i18n/utils';
 
 const locale = 'en';
 const t = (key: string) => getTranslation(key, locale);
+
+const actuModules = import.meta.glob('../../../content/actualites/en/*.md', { eager: true });
+const actus = (Object.values(actuModules) as any[])
+  .map(a => a.frontmatter)
+  .filter((a: any) => a.publie !== false);
+const heroActu = actus[0];
 ---
 
 <BaseLayout title={t('pages.news.title')} description={t('pages.news.description')} locale={locale} currentPath="/en/news">
-  <section class="hero-page"><div class="container"><ScrollReveal animation="fade-in"><h1>{t('pages.news.hero.heading')}</h1><p class="hero-text">{t('pages.news.hero.body')}</p></ScrollReveal></div></section>
-  <section class="section"><div class="container cards-grid">
-    <ScrollReveal animation="slide-up" delay={1}><article class="card card-hover"><div class="card-accent"></div><h2>{t('pages.news.tournaments.heading')}</h2><p>{t('pages.news.tournaments.body')}</p></article></ScrollReveal>
-    <ScrollReveal animation="slide-up" delay={2}><article class="card card-hover"><div class="card-accent"></div><h2>{t('pages.news.events.heading')}</h2><p>{t('pages.news.events.body')}</p></article></ScrollReveal>
-  </div></section>
+  {heroActu ? (
+    <section class="tournoi-hero">
+      <div class="tournoi-bg">
+        <img src={asset(heroActu.image ?? '/images/hero-courts.jpg')} alt="" aria-hidden="true" />
+      </div>
+      <div class="tournoi-overlay"></div>
+      <div class="tournoi-content">
+        <ScrollReveal animation="fade-in">
+          {heroActu.tag && <span class="tournoi-tag">{heroActu.tag}</span>}
+          <h1>{heroActu.titre}</h1>
+          {heroActu.dates && <p class="tournoi-dates">{heroActu.dates}</p>}
+          {heroActu.description && <p class="tournoi-desc">{heroActu.description}</p>}
+          {heroActu.lien && (
+            <a href={heroActu.lien} target="_blank" rel="noopener noreferrer" class="tournoi-btn">
+              {heroActu.lienLabel ?? 'Learn more →'}
+            </a>
+          )}
+        </ScrollReveal>
+      </div>
+    </section>
+  ) : (
+    <section class="hero-page"><div class="container"><ScrollReveal animation="fade-in"><h1>{t('pages.news.hero.heading')}</h1><p class="hero-text">{t('pages.news.hero.body')}</p></ScrollReveal></div></section>
+  )}
 </BaseLayout>
 
 <style>

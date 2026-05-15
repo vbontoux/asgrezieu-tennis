@@ -85,11 +85,64 @@ Ce plan convertit la conception technique en étapes de développement incrémen
 
 - [ ] 13. Checkpoint final — Validation complète
 
+---
+
+## Phase 4 : Intégration Tina CMS — Édition sans code
+
+Objectif : permettre à des non-développeurs de mettre à jour le contenu du site via une interface visuelle (`/admin`), sans toucher au code. Le site reste un site statique Astro identique visuellement.
+
+- [ ] 14. Installation et configuration Tina CMS
+  - [ ] 14.1 Installer `tinacms` et mettre à jour les scripts `dev` / `build` dans `package.json`
+  - [ ] 14.2 Créer `tina/config.ts` avec la configuration de base (clientId, branch, build)
+  - [ ] 14.3 Vérifier que `npm run dev` démarre bien le site ET l'éditeur sur `:4321/admin`
+  - _Exigence : 10.1_
+
+- [ ] 15. Modélisation du contenu — Schémas Tina
+  - [ ] 15.1 Collection `conseil` : champs nom, rôle, email, photo, catégorie (direction / bureau / membre), locale (fr/en)
+  - [ ] 15.2 Collection `sponsors` : champs logo, url, alt, ordre
+  - [ ] 15.3 Collection `actualites` : champs titre, dates, description, lien externe, locale (fr/en)
+  - [ ] 15.4 Collection `entrainements` : sous-schémas coachs (nom, diplôme) + créneaux par jour (heure, label, coach), locale
+  - _Exigence : 10.2_
+
+- [ ] 16. Migration des données hardcodées vers fichiers Markdown
+  - [ ] 16.1 Extraire `fr/conseil.astro` → `content/conseil/fr/*.md` (11 fichiers membres)
+  - [ ] 16.2 Extraire `en/board.astro` → `content/conseil/en/*.md` (miroir EN)
+  - [ ] 16.3 Extraire `fr/sponsoring.astro` → `content/sponsors/*.md` (5 sponsors, partagé FR/EN)
+  - [ ] 16.4 Extraire `fr/actualites.astro` → `content/actualites/fr/*.md`
+  - [ ] 16.5 Extraire `en/news.astro` → `content/actualites/en/*.md`
+  - [ ] 16.6 Extraire coachs + planning de `fr/entrainements.astro` → `content/entrainements/fr/*.md`
+  - _Exigence : 10.2_
+
+- [ ] 17. Refactoring des pages Astro pour utiliser les queries Tina
+  - [ ] 17.1 Refactorer `fr/conseil.astro` et `en/board.astro` — remplacer les arrays par `tinaClient.queries`
+  - [ ] 17.2 Refactorer `fr/sponsoring.astro` et `en/sponsoring.astro`
+  - [ ] 17.3 Refactorer `fr/actualites.astro` et `en/news.astro`
+  - [ ] 17.4 Refactorer `fr/entrainements.astro` et `en/training.astro`
+  - [ ] 17.5 Vérifier que le rendu visuel est identique avant/après sur toutes les pages
+  - _Exigence : 10.3_
+
+- [ ] 18. Configuration Tina Cloud et workflow éditorial
+  - [ ] 18.1 Créer un compte Tina Cloud et connecter le repo GitHub
+  - [ ] 18.2 Configurer les variables d'environnement (`TINA_PUBLIC_CLIENT_ID`, `TINA_TOKEN`)
+  - [ ] 18.3 Mettre à jour le pipeline GitHub Actions pour intégrer `tinacms build`
+  - [ ] 18.4 Tester le workflow complet : édition dans `/admin` → commit auto → build → déploiement GitHub Pages
+  - [ ] 18.5 Documenter le processus d'édition pour les membres non-techniques du club
+  - _Exigence : 10.4_
+
+- [ ] 19. Checkpoint Phase 4 — Validation éditoriale
+  - [ ] 19.1 Un éditeur non-technique peut modifier un membre du conseil et voir le changement en ligne
+  - [ ] 19.2 Un éditeur peut ajouter un événement dans Actualités sans toucher au code
+  - [ ] 19.3 Le site statique final (dist/) est identique en rendu à avant l'intégration Tina
+
+---
+
 ## Notes
 
 - Phases 1 à 9 terminées — le site est fonctionnel, bilingue, avec animations et design modernisé
-- Le zip de distribution (3.5 Mo) est prêt à envoyer par email
-- Phase 3 couvre l'accessibilité avancée, la performance et le déploiement en production
+- Phase 3 (tâches 10-13) : accessibilité WCAG, performances, CI/CD — à traiter en parallèle ou après Phase 4
+- Phase 4 (tâches 14-19) : intégration Tina CMS pour édition sans code par les membres du club
+- Tina CMS : édition locale via filesystem, édition en ligne via Tina Cloud (gratuit jusqu'à 2 utilisateurs)
+- Le site reste un site statique pur — Tina ne s'exécute pas côté visiteur
 - Toutes les animations respectent `prefers-reduced-motion`
 - Navigation : Accueil, Entraînements, Actualités, Conseil d'administration, Sponsoring, Infos & Contacts
 - Palette : bleu marine #2b3a67 / #1e2a4a, doré #c9a84c, blanc

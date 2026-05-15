@@ -495,6 +495,136 @@ interface RollbackConfig {
 
 ---
 
+## Intégration Tina CMS
+
+### Vue d'ensemble
+
+Tina CMS s'intercale entre le contenu et le build Astro sans modifier le rendu final. Le site reste un site statique identique pour les visiteurs.
+
+```
+┌─────────────────────────────────────────────────┐
+│  Éditeur (membre du club)                        │
+│  → ouvre /admin sur le site                      │
+│  → modifie contenu dans l'UI Tina                │
+└──────────────────┬──────────────────────────────┘
+                   │ Tina Cloud (auth GitHub)
+                   ▼
+┌─────────────────────────────────────────────────┐
+│  Repo GitHub                                     │
+│  → commit automatique sur branch main            │
+└──────────────────┬──────────────────────────────┘
+                   │ GitHub Actions
+                   ▼
+┌─────────────────────────────────────────────────┐
+│  Build : tinacms build → astro build             │
+│  → dist/ statique identique                      │
+└──────────────────┬──────────────────────────────┘
+                   │
+                   ▼
+            GitHub Pages (inchangé)
+```
+
+### Ce qui change dans la structure du projet
+
+```
+asgrezieu-tennis/
+├── tina/                          ← NOUVEAU
+│   ├── config.ts                  ← Schémas des collections éditables
+│   └── __generated__/             ← Auto-généré par Tina (ne pas éditer)
+│       ├── types.ts
+│       └── client.ts              ← Client utilisé dans les pages Astro
+├── content/                       ← NOUVEAU (données extraites des .astro)
+│   ├── conseil/
+│   │   ├── fr/                    ← 11 fichiers membres (fr)
+│   │   └── en/                    ← 11 fichiers membres (en)
+│   ├── sponsors/                  ← 5 fichiers sponsors (partagé FR/EN)
+│   ├── actualites/
+│   │   ├── fr/
+│   │   └── en/
+│   └── entrainements/
+│       ├── fr/
+│       └── en/
+└── src/pages/                     ← Pages refactorisées (queries Tina)
+    ├── fr/conseil.astro            ← Array hardcodé → tinaClient.queries
+    ├── fr/sponsoring.astro
+    ├── fr/actualites.astro
+    └── fr/entrainements.astro
+```
+
+### Collections Tina (schémas)
+
+| Collection | Champs éditables | Bilingue |
+|---|---|---|
+| `conseil` | nom, rôle, email, photo, catégorie | Oui (fr/en séparés) |
+| `sponsors` | logo, url, texte alternatif, ordre | Non (partagé) |
+| `actualites` | titre, dates, description, lien externe | Oui (fr/en séparés) |
+| `entrainements` | coachs (nom, diplôme) + créneaux par jour | Oui (fr/en séparés) |
+
+### Pattern de refactoring des pages
+
+**Avant (données hardcodées dans le frontmatter) :**
+```typescript
+// src/pages/fr/conseil.astro
+const direction = [
+  { name: 'BONTOUX Romain', role: 'Président', email: '...', photo: '...' },
+  ...
+];
+```
+
+**Après (données depuis Tina) :**
+```typescript
+// src/pages/fr/conseil.astro
+import { client } from '../../tina/__generated__/client';
+const { data } = await client.queries.conseilConnection({ filter: { locale: { eq: 'fr' } } });
+const direction = data.conseilConnection.edges
+  .map(e => e.node)
+  .filter(m => m.categorie === 'direction');
+```
+
+### Scripts mis à jour
+
+```json
+{
+  "scripts": {
+    "dev":   "tinacms dev -c \"astro dev\"",
+    "build": "tinacms build && astro build",
+    "preview": "astro preview"
+  }
+}
+```
+
+### Workflow local (développeur)
+
+```
+npm run dev
+  → Tina démarre en mode filesystem (pas besoin de cloud)
+  → Site disponible sur localhost:4321/asgrezieu-tennis/fr/
+  → Éditeur disponible sur localhost:4321/asgrezieu-tennis/admin/index.html
+  → Modifications écrivent directement dans content/**/*.md
+```
+Note : avec base: '/asgrezieu-tennis', Astro sert les fichiers public/ sous le base path,
+donc l'admin est à /asgrezieu-tennis/admin/ et non à /admin/.
+
+### Workflow en production (éditeur non-technique)
+
+```
+1. L'éditeur ouvre https://vbontoux.github.io/asgrezieu-tennis/admin
+2. Connexion via Tina Cloud (GitHub OAuth)
+3. Modification du contenu dans l'UI
+4. Sauvegarde → commit automatique sur main
+5. GitHub Actions déclenché → tinacms build && astro build
+6. Site mis à jour sur GitHub Pages (~2 minutes)
+```
+
+### Variables d'environnement requises
+
+| Variable | Contexte | Description |
+|---|---|---|
+| `TINA_PUBLIC_CLIENT_ID` | Build CI + runtime admin | ID du projet Tina Cloud |
+| `TINA_TOKEN` | Build CI uniquement | Token d'accès repo (secret GitHub) |
+
+---
+
 ## Gestion des Erreurs
 
 ### Erreurs au build

@@ -141,3 +141,17 @@ Refonte du site web du club de tennis AS Grézieu Tennis (https://www.asgrezieut
 4. IF la largeur de l'écran est inférieure à 768px, THEN THE Site SHALL dimensionner les zones tactiles interactives à un minimum de 44x44 pixels
 5. THE Site SHALL éviter le défilement horizontal sur toutes les tailles d'écran supportées (320px à 2560px)
 6. THE Site SHALL redimensionner les images et médias proportionnellement à leur conteneur sans dépasser la largeur de la zone d'affichage
+
+### Exigence 10 : Édition du contenu sans compétences techniques
+
+**User Story :** En tant que membre du bureau du club, je veux pouvoir mettre à jour le contenu du site (membres du conseil, sponsors, actualités, planning) via une interface simple, sans avoir besoin de modifier du code ni de faire appel à un développeur.
+
+#### Critères d'acceptation
+
+1. THE Site SHALL exposer une interface d'administration accessible à l'URL `/admin` permettant de modifier le contenu des pages sans écrire de code
+2. WHEN un éditeur modifie et sauvegarde du contenu dans l'interface `/admin`, THE Site SHALL déclencher automatiquement un build et mettre à jour la version en ligne dans un délai inférieur à 5 minutes
+3. THE Site SHALL permettre la gestion des collections suivantes via l'interface d'administration : membres du conseil d'administration, sponsors, actualités/événements, planning et coachs des entraînements
+4. WHEN un éditeur modifie du contenu via l'interface `/admin`, THE Site SHALL conserver les deux versions linguistiques (français et anglais) distinctes et éditables indépendamment
+5. THE Site SHALL rester un site statique généré (HTML/CSS/JS) pour les visiteurs — l'interface d'administration ne doit pas être visible ni accessible aux visiteurs ordinaires
+6. WHEN un développeur exécute `npm run dev` en local, THE Site SHALL démarrer simultanément le serveur de développement Astro et l'interface d'administration Tina sur le même port
+7. IF la connexion à Tina Cloud est indisponible, THEN THE Site SHALL continuer à fonctionner normalement pour les visiteurs (site statique non impacté)
