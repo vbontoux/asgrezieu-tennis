@@ -35,28 +35,26 @@
 }
 
 /* === Mobile navigation === */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .desktop-nav {
     display: none;
   }
 
-  .mobile-nav-toggle {
-    display: flex;
-  }
-
-  /* Minimum touch target size */
-  a, button, [role="button"], input, select, textarea {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-nav-toggle {
+  .header-actions {
     display: none;
   }
 
-  .mobile-nav-panel {
+  .hamburger-btn {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+
+  .mobile-menu {
     display: none;
   }
 }
