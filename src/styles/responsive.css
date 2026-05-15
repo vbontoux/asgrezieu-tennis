@@ -35,29 +35,7 @@
 }
 
 /* === Mobile navigation === */
-@media (max-width: 1023px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  .header-actions {
-    display: none;
-  }
-
-  .hamburger-btn {
-    display: flex;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hamburger-btn {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: none;
-  }
-}
+/* Menu hamburger always visible — handled in Header.astro scoped styles */
 
 /* Prevent horizontal scroll */
 html, body {

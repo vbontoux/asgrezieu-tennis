@@ -191,7 +191,7 @@ const langHref = getLocalePath(currentPath.replace(/^\/(fr|en)(\/|$)/, '/'), alt
     width: auto;
   }
 
-  /* Desktop nav */
+  /* Desktop nav — always hidden, use hamburger everywhere */
   .desktop-nav {
     display: none;
   }
@@ -234,9 +234,9 @@ const langHref = getLocalePath(currentPath.replace(/^\/(fr|en)(\/|$)/, '/'), alt
     color: var(--color-primary);
   }
 
-  /* Header actions (desktop) */
+  /* Header actions — always visible */
   .header-actions {
-    display: none;
+    display: flex;
     align-items: center;
     gap: var(--spacing-sm);
   }
@@ -282,7 +282,7 @@ const langHref = getLocalePath(currentPath.replace(/^\/(fr|en)(\/|$)/, '/'), alt
     background-color: var(--color-background-alt);
   }
 
-  /* Hamburger button */
+  /* Hamburger always visible */
   .hamburger-btn {
     display: flex;
     flex-direction: column;
@@ -425,25 +425,6 @@ const langHref = getLocalePath(currentPath.replace(/^\/(fr|en)(\/|$)/, '/'), alt
   .mobile-social a:hover {
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  /* Desktop breakpoint — show full nav */
-  @media (min-width: 1024px) {
-    .hamburger-btn {
-      display: none;
-    }
-
-    .desktop-nav {
-      display: block;
-    }
-
-    .header-actions {
-      display: flex;
-    }
-
-    .mobile-menu {
-      display: none;
-    }
   }
 
   /* Header scroll effect */
