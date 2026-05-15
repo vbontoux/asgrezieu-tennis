@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../components/animations/ScrollReveal.astro';
+import { asset } from '../../i18n/utils';
 
 const locale = 'fr';
 ---
@@ -11,68 +12,220 @@ const locale = 'fr';
   locale={locale}
   currentPath="/fr/actualites"
 >
-  <div class="page-dark">
-    <section class="section">
-      <div class="container">
-        <ScrollReveal animation="fade-in">
-          <div class="section-header">
-            <h1>Actualités du Club</h1>
-            <div class="title-separator"></div>
+  <!-- Hero Tournoi — plein écran, engageant -->
+  <section class="tournoi-hero">
+    <div class="tournoi-bg">
+      <img src={asset('/images/hero-courts.jpg')} alt="" aria-hidden="true" />
+    </div>
+    <div class="tournoi-overlay"></div>
+    <div class="tournoi-content">
+      <ScrollReveal animation="fade-in">
+        <span class="tournoi-tag">🎾 Événement</span>
+        <h1>Tournoi Open</h1>
+        <p class="tournoi-dates">Du 2 au 25 avril 2025</p>
+        <p class="tournoi-desc">Que vous soyez compétiteur ou amateur, venez vous challenger sur les courts dans une ambiance conviviale !</p>
+        <a href="https://tenup.fft.fr/tournoi/189908" target="_blank" rel="noopener noreferrer" class="tournoi-btn">
+          S'inscrire sur Ten'Up →
+        </a>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Section Location -->
+  <section class="location-section">
+    <div class="container">
+      <ScrollReveal animation="slide-up">
+        <div class="location-card">
+          <div class="location-icon">🆕</div>
+          <div class="location-body">
+            <h2>Location de terrains ouverte à tous</h2>
+            <p>Le Club ouvre désormais la location horaire de ses terrains aux <strong>non-adhérents et non-licenciés</strong> !</p>
+            <a href="https://www.anybuddyapp.com/club-grezieu-tennis-as/reservation/tennis?activity=tennis" target="_blank" rel="noopener noreferrer" class="location-btn">
+              Réserver sur Anybuddy →
+            </a>
           </div>
-        </ScrollReveal>
-
-        <div class="news-grid">
-          <ScrollReveal animation="slide-up" delay={1}>
-            <article class="news-card card-hover">
-              <div class="news-badge">🎾 Tournoi</div>
-              <h2>Tournoi Open — 2 au 25 avril</h2>
-              <p>Cette année, le Tournoi Open revient du 2 au 25 avril !</p>
-              <p>Que vous soyez compétiteur ou amateur, venez vous challenger sur les courts dans une ambiance conviviale !</p>
-              <p class="news-cta">
-                <strong>Inscription et règlement via Ten'Up :</strong><br/>
-                <a href="https://tenup.fft.fr/tournoi/189908" target="_blank" rel="noopener noreferrer" class="news-link">
-                  tenup.fft.fr/tournoi/189908 →
-                </a>
-              </p>
-              <p class="news-footer">On vous attend nombreux !</p>
-            </article>
-          </ScrollReveal>
-
-          <ScrollReveal animation="slide-up" delay={2}>
-            <article class="news-card card-hover">
-              <div class="news-badge">🎾 Nouveau</div>
-              <h2>Location de terrains ouverte à tous</h2>
-              <p>Le Club ouvre désormais la location horaire de ses terrains aux non-adhérents et non-licenciés !</p>
-              <p class="news-cta">
-                <strong>Réservez sur Anybuddy :</strong><br/>
-                <a href="https://www.anybuddyapp.com/club-grezieu-tennis-as/reservation/tennis?activity=tennis" target="_blank" rel="noopener noreferrer" class="news-link">
-                  anybuddyapp.com — Réserver un court →
-                </a>
-              </p>
-            </article>
-          </ScrollReveal>
         </div>
-      </div>
-    </section>
-  </div>
+      </ScrollReveal>
+    </div>
+  </section>
 </BaseLayout>
 
-<style is:global>body:has(.page-dark){background-color:#1e2a4a;}</style>
 <style>
-  .page-dark { background-color: #1e2a4a; padding-top: var(--spacing-xl); padding-bottom: var(--spacing-3xl); }
-  .section { padding: var(--spacing-2xl) 0; }
-  .section-header { text-align: center; margin-bottom: var(--spacing-2xl); }
-  .section-header h1 { color: #ffffff; font-size: clamp(28px, 4vw, 44px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-md); }
-  .title-separator { width: 80px; height: 3px; background-color: #c9a84c; margin: 0 auto; }
+  /* Tournoi Hero — full width, immersif */
+  .tournoi-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 
-  .news-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl); max-width: 800px; margin: 0 auto; }
+  .tournoi-bg {
+    position: absolute;
+    inset: 0;
+  }
 
-  .news-card { background: #ffffff; border-radius: 12px; padding: var(--spacing-2xl); box-shadow: 0 4px 24px rgba(0,0,0,.2); border-left: 5px solid var(--color-primary); }
-  .news-badge { display: inline-block; font-size: var(--font-size-sm); font-weight: 600; color: var(--color-primary); margin-bottom: var(--spacing-md); }
-  .news-card h2 { font-size: var(--font-size-xl); color: #1e2a4a; margin-bottom: var(--spacing-md); }
-  .news-card p { font-size: var(--font-size-base); color: var(--color-text); line-height: 1.7; margin-bottom: var(--spacing-sm); }
-  .news-cta { margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--color-background-alt); border-radius: var(--border-radius); }
-  .news-link { color: var(--color-primary); font-weight: 600; word-break: break-all; }
-  .news-link:hover { color: var(--color-secondary); }
-  .news-footer { font-weight: 600; color: var(--color-primary); margin-top: var(--spacing-md); }
+  .tournoi-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4);
+  }
+
+  .tournoi-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(30, 42, 74, 0.3) 0%,
+      rgba(30, 42, 74, 0.85) 100%
+    );
+  }
+
+  .tournoi-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--spacing-3xl) var(--spacing-md);
+    max-width: 700px;
+  }
+
+  .tournoi-tag {
+    display: inline-block;
+    padding: 6px 20px;
+    background: rgba(201, 168, 76, 0.2);
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 50px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .tournoi-hero h1 {
+    color: #ffffff;
+    font-size: clamp(40px, 8vw, 72px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: var(--spacing-md);
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .tournoi-dates {
+    font-size: clamp(18px, 3vw, 28px);
+    color: #c9a84c;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: 1px;
+  }
+
+  .tournoi-desc {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tournoi-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #c9a84c;
+    color: #1e2a4a;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 250ms ease, box-shadow 250ms ease;
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
+  }
+
+  .tournoi-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(201, 168, 76, 0.5);
+    color: #1e2a4a;
+  }
+
+  /* Location section */
+  .location-section {
+    background: var(--color-dark);
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .location-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: var(--spacing-2xl);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .location-icon {
+    font-size: 40px;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+  }
+
+  .location-body h2 {
+    color: #ffffff;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .location-body p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .location-body strong {
+    color: #ffffff;
+  }
+
+  .location-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 2px solid #c9a84c;
+    color: #c9a84c;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 250ms ease, color 250ms ease, transform 200ms ease;
+  }
+
+  .location-btn:hover {
+    background: #c9a84c;
+    color: #1e2a4a;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    .location-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
 </style>
