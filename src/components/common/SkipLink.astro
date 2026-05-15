@@ -1,0 +1,33 @@
+---
+import { getTranslation, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const label = getTranslation('common.skipToContent', locale);
+---
+
+<a href="#main-content" class="skip-link">
+  {label}
+</a>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 9999;
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 16px;
+  }
+</style>

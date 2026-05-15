@@ -1,0 +1,77 @@
+============================================
+  NOUVEAU SITE AS GRÉZIEU TENNIS
+  Comment visualiser le site sur votre Mac
+============================================
+
+Bonjour,
+
+Voici la nouvelle version du site web du club. Pour le visualiser 
+sur votre ordinateur, suivez ces étapes simples :
+
+
+ÉTAPE 1 — Décompresser le fichier
+-----------------------------------
+Double-cliquez sur le fichier "asgrezieu-tennis-site.zip" 
+pour le décompresser. Un dossier "dist" va apparaître.
+
+
+ÉTAPE 2 — Ouvrir le Terminal
+-----------------------------------
+1. Appuyez sur Cmd + Espace (la barre d'espace)
+2. Tapez "Terminal" dans la barre de recherche
+3. Appuyez sur Entrée
+
+Une fenêtre noire avec du texte va s'ouvrir.
+
+
+ÉTAPE 3 — Aller dans le dossier du site
+-----------------------------------
+Dans le Terminal, tapez cette commande puis appuyez sur Entrée :
+
+   cd ~/Downloads/dist
+
+(Si vous avez décompressé le fichier ailleurs que dans 
+Téléchargements, remplacez ~/Downloads par le bon chemin)
+
+
+ÉTAPE 4 — Lancer le site
+-----------------------------------
+Tapez cette commande puis appuyez sur Entrée :
+
+   python3 -m http.server 8000
+
+Vous devriez voir apparaître :
+"Serving HTTP on :: port 8000 ..."
+
+
+ÉTAPE 5 — Voir le site
+-----------------------------------
+Ouvrez votre navigateur (Safari, Chrome, Firefox...) et allez à :
+
+   http://localhost:8000/fr/
+
+Le site s'affiche ! Vous pouvez naviguer entre les pages.
+Pour voir la version anglaise : http://localhost:8000/en/
+
+
+POUR ARRÊTER
+-----------------------------------
+Retournez dans le Terminal et appuyez sur Ctrl + C
+
+
+PAGES DISPONIBLES
+-----------------------------------
+- Accueil (page d'accueil avec photo des courts)
+- Entraînements
+- Actualités et événements
+- Conseil d'administration (avec les photos des membres)
+- Sponsoring (carousel des partenaires)
+- Infos & Contacts (avec formulaire)
+
+Toutes les pages existent en français et en anglais.
+Le bouton "EN" en haut à droite permet de changer de langue.
+
+
+En cas de problème, n'hésitez pas à me contacter.
+
+Bonne visite !

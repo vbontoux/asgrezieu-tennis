@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/animations/ScrollReveal.astro';
+import { asset } from '../../i18n/utils';
+
+const locale = 'fr';
+
+const sponsors = [
+  { logo: asset('/images/sponsors/sponsor-1.jpg'), alt: 'Sandra Viricel Immobilier', url: 'https://www.sandraviricel.com' },
+  { logo: asset('/images/sponsors/sponsor-2.png'), alt: 'MK Magnetik Enseignes', url: 'https://www.magnetik-enseignes.com/' },
+  { logo: asset('/images/sponsors/sponsor-3.png'), alt: 'Toane Restaurant', url: 'https://www.toane.com' },
+  { logo: asset('/images/sponsors/sponsor-4.png'), alt: 'Evideence Créateur d\'événements', url: 'https://www.evideence.fr' },
+  { logo: asset('/images/sponsors/sponsor-5.avif'), alt: 'Robino Pizza', url: 'https://www.robino-cafe-pizza.com/' },
+];
+---
+
+<BaseLayout
+  title="Sponsoring - Grézieu Tennis"
+  description="Nos partenaires saison 2025/2026. Devenez partenaire du Tennis Club de Grézieu-la-Varenne."
+  locale={locale}
+  currentPath="/fr/sponsoring"
+>
+  <div class="page-dark">
+    <!-- Partenaires avec carousel -->
+    <section class="section">
+      <div class="container">
+        <ScrollReveal animation="fade-in">
+          <div class="section-header">
+            <h1>Partenaires<br/>Saison 2025/2026</h1>
+            <div class="title-separator"></div>
+          </div>
+        </ScrollReveal>
+
+        <div class="sponsors-carousel" role="region" aria-label="Carousel des partenaires">
+          <button class="carousel-btn carousel-prev" aria-label="Partenaire précédent">&lsaquo;</button>
+          <div class="carousel-track">
+            {sponsors.map((sponsor) => (
+              <div class="sponsor-item" data-url={sponsor.url} data-name={sponsor.alt}>
+                <div class="sponsor-circle">
+                  <img src={sponsor.logo} alt={sponsor.alt} width="200" height="200" loading="lazy" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <button class="carousel-btn carousel-next" aria-label="Partenaire suivant">&rsaquo;</button>
+        </div>
+
+        <!-- Modal zoom -->
+        <div class="sponsor-modal" id="sponsor-modal" hidden>
+          <div class="sponsor-modal-backdrop"></div>
+          <div class="sponsor-modal-content">
+            <button class="sponsor-modal-close" aria-label="Fermer">&times;</button>
+            <img class="sponsor-modal-img" src="" alt="" />
+            <p class="sponsor-modal-name"></p>
+            <a class="sponsor-modal-link" href="" target="_blank" rel="noopener noreferrer" hidden>Visiter le site →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soutenir le club -->
+    <section class="section">
+      <div class="container">
+        <ScrollReveal animation="fade-in">
+          <div class="section-header">
+            <h2 class="section-title-white">Soutenir le Club</h2>
+            <div class="title-separator"></div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal animation="slide-up">
+          <div class="content-card">
+            <p class="content-lead"><strong>Vous cherchez à valoriser votre image locale tout en soutenant un club sportif engagé et convivial ?</strong></p>
+
+            <p>Devenez partenaire de l'AS Grézieu Tennis et associez votre entreprise à un acteur historique du sport à Grézieu-la-Varenne, reconnu pour son dynamisme et ses valeurs humaines.</p>
+
+            <p>Depuis plus de 50 ans, notre club familial fait vivre le tennis à travers toutes les générations, avec plus de 320 licenciés, du mini-tennis aux catégories adultes. Véritable lieu de rencontre et de partage, le club contribue activement à la vie de la commune et au développement du sport pour tous.</p>
+
+            <p>En nous soutenant, vous bénéficiez d'une visibilité locale privilégiée :</p>
+            <ul>
+              <li>Votre logo apparaît sur nos réseaux sociaux,</li>
+              <li>Vous êtes mis en avant sur nos affiches de tournois et événements,</li>
+              <li>Et vous disposez d'un panneau publicitaire au sein de nos installations sportives, visibles tout au long de l'année.</li>
+            </ul>
+          </div>
+        </ScrollReveal>
+
+        <!-- CTA Block -->
+        <ScrollReveal animation="slide-up">
+          <div class="cta-block">
+            <h3>Intéressé ?</h3>
+            <p>Contactez notre responsable sponsoring pour discuter des différentes formules de partenariat adaptées à votre entreprise.</p>
+            <div class="cta-contacts">
+              <a href="mailto:patrice.lagarde@asgrezieutennis.com" class="cta-btn cta-btn-filled">Contacter Patrice LAGARDE</a>
+              <a href="mailto:florent.lebayle@asgrezieutennis.com" class="cta-btn cta-btn-outline">Contacter Florent LEBAYLE</a>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const track = document.querySelector('.carousel-track');
+  const prevBtn = document.querySelector('.carousel-prev');
+  const nextBtn = document.querySelector('.carousel-next');
+  const modal = document.getElementById('sponsor-modal');
+  const modalImg = modal?.querySelector('.sponsor-modal-img') as HTMLImageElement;
+  const modalLink = modal?.querySelector('.sponsor-modal-link') as HTMLAnchorElement;
+  const modalName = modal?.querySelector('.sponsor-modal-name') as HTMLParagraphElement;
+  const modalClose = modal?.querySelector('.sponsor-modal-close');
+  const modalBackdrop = modal?.querySelector('.sponsor-modal-backdrop');
+
+  if (track && prevBtn && nextBtn) {
+    const scrollAmount = 220;
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    // Auto-scroll every 3 seconds
+    let autoScroll = setInterval(() => {
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, 3000);
+
+    track.addEventListener('mouseenter', () => clearInterval(autoScroll));
+    track.addEventListener('mouseleave', () => {
+      autoScroll = setInterval(() => {
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }, 3000);
+    });
+  }
+
+  // Sponsor click → zoom modal
+  document.querySelectorAll('.sponsor-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img') as HTMLImageElement;
+      const url = (item as HTMLElement).dataset.url || '#';
+      const name = (item as HTMLElement).dataset.name || '';
+
+      if (modal && modalImg && modalLink && modalName) {
+        modalImg.src = img.src;
+        modalImg.alt = name;
+        modalName.textContent = name;
+        const hasUrl = url && url.length > 0;
+        if (hasUrl) {
+          modalLink.href = url;
+          modalLink.textContent = `Visiter le site →`;
+          modalLink.hidden = false;
+        } else {
+          modalLink.href = '';
+          modalLink.hidden = true;
+        }
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  function closeModal() {
+    if (modal) {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+  }
+
+  modalClose?.addEventListener('click', closeModal);
+  modalBackdrop?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+<style is:global>
+  body:has(.page-dark) {
+    background-color: #1e2a4a;
+  }
+</style>
+
+<style>
+  .page-dark {
+    background-color: #1e2a4a;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-3xl);
+  }
+
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .section-header h1,
+  .section-title-white {
+    color: #ffffff;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .title-separator {
+    width: 80px;
+    height: 3px;
+    background-color: #c9a84c;
+    margin: 0 auto;
+  }
+
+  /* Carousel */
+  .sponsors-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .carousel-track {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xl);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: var(--spacing-lg) 0;
+    flex: 1;
+    -ms-overflow-style: none;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sponsor-item {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+
+  .sponsor-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .sponsor-circle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .sponsor-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-btn {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #ffffff;
+    transform: scale(1.1);
+  }
+
+  .sponsor-item {
+    cursor: pointer;
+  }
+
+  /* Modal zoom */
+  .sponsor-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsor-modal[hidden] {
+    display: none;
+  }
+
+  .sponsor-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .sponsor-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: var(--spacing-2xl);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modal-in 300ms ease-out;
+  }
+
+  @keyframes modal-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .sponsor-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--color-text-light);
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 200ms ease;
+  }
+
+  .sponsor-modal-close:hover {
+    background: var(--color-background-alt);
+  }
+
+  .sponsor-modal-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto var(--spacing-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .sponsor-modal-name {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-dark, #1e2a4a);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .sponsor-modal-link {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+
+  .sponsor-modal-link:hover {
+    background: var(--color-secondary);
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+
+  /* Content card */
+  .content-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: var(--spacing-3xl);
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid var(--color-primary);
+  }
+
+  .content-lead {
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+  }
+
+  .content-card p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+    text-align: justify;
+  }
+
+  .content-card ul {
+    list-style: disc;
+    padding-left: var(--spacing-xl);
+    margin-top: var(--spacing-sm);
+  }
+
+  .content-card li {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  @media (max-width: 600px) {
+    .sponsor-circle {
+      width: 140px;
+      height: 140px;
+    }
+
+    .content-card {
+      padding: var(--spacing-xl);
+    }
+  }
+
+  /* CTA Block */
+  .cta-block {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    max-width: 800px;
+    margin: var(--spacing-2xl) auto 0;
+  }
+
+  .cta-block h3 {
+    color: #ffffff;
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-block p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.7;
+  }
+
+  .cta-contacts {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-2xl);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    border-radius: 50px;
+    text-decoration: none;
+    min-height: 48px;
+    transition: transform 250ms ease, box-shadow 250ms ease, background-color 250ms ease;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .cta-btn-filled {
+    background: #c9a84c;
+    color: #1e2a4a;
+    border: 2px solid #c9a84c;
+  }
+
+  .cta-btn-filled:hover {
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
+    color: #1e2a4a;
+  }
+
+  .cta-btn-outline {
+    background: transparent;
+    border: 2px solid #c9a84c;
+    color: #c9a84c;
+  }
+
+  .cta-btn-outline:hover {
+    background: #c9a84c;
+    color: #1e2a4a;
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+  }
+</style>

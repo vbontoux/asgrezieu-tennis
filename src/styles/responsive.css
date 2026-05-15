@@ -1,0 +1,67 @@
+/* === Responsive Design === */
+
+/* Mobile first — base styles are for mobile */
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  :root {
+    --font-size-3xl: 48px;
+    --font-size-2xl: 36px;
+    --spacing-3xl: 80px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --font-size-3xl: 56px;
+    --font-size-2xl: 40px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 var(--spacing-2xl);
+  }
+}
+
+/* === Mobile navigation === */
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  /* Minimum touch target size */
+  a, button, [role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .mobile-nav-panel {
+    display: none;
+  }
+}
+
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}

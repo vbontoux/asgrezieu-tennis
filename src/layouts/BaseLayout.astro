@@ -1,0 +1,48 @@
+---
+import SkipLink from '../components/common/SkipLink.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import ScrollReveal from '../components/animations/ScrollReveal.astro';
+import { getHreflangLinks, asset, type Locale } from '../i18n/utils';
+import '../styles/global.css';
+import '../styles/animations.css';
+import '../styles/responsive.css';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  currentPath: string;
+}
+
+const { title, description, locale, currentPath } = Astro.props;
+const hreflangLinks = getHreflangLinks(currentPath, Astro.site?.origin || 'https://www.asgrezieutennis.com');
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href={asset('/images/logo.png')} />
+  {hreflangLinks.map(link => (
+    <link rel="alternate" hreflang={link.locale} href={link.href} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={hreflangLinks.find(l => l.locale === 'fr')?.href} />
+</head>
+<body>
+  <SkipLink locale={locale} />
+  <Header locale={locale} currentPath={currentPath} />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer locale={locale} />
+</body>
+</html>

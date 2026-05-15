@@ -1,0 +1,184 @@
+/* === Animations CSS — Sobres et modernes === */
+
+/* Keyframes */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ken-burns {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* Classes d'animation pour ScrollReveal */
+[data-animate] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-animate="fade-in"] {
+  opacity: 0;
+}
+
+[data-animate="slide-up"] {
+  transform: translateY(30px);
+}
+
+[data-animate="slide-left"] {
+  transform: translateX(30px);
+}
+
+[data-animate="slide-right"] {
+  transform: translateX(-30px);
+}
+
+[data-animate="scale-in"] {
+  transform: scale(0.95);
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger delays pour les éléments en grille */
+[data-animate-delay="1"] { transition-delay: 100ms; }
+[data-animate-delay="2"] { transition-delay: 200ms; }
+[data-animate-delay="3"] { transition-delay: 300ms; }
+[data-animate-delay="4"] { transition-delay: 400ms; }
+
+/* Hover effects — Cartes */
+.card-hover {
+  transition: transform 250ms ease-out, box-shadow 250ms ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(43, 58, 103, 0.15);
+}
+
+/* Hover effects — Liens avec underline animé */
+.link-animated {
+  position: relative;
+  display: inline-block;
+}
+
+.link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 250ms ease-out;
+}
+
+.link-animated:hover::after {
+  width: 100%;
+}
+
+/* Hover effects — Boutons */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: color 300ms ease, background-color 300ms ease, transform 150ms ease;
+}
+
+.btn-animated:hover {
+  transform: translateY(-1px);
+}
+
+.btn-animated:active {
+  transform: translateY(0);
+}
+
+/* Hover effects — Images galerie */
+.img-zoom {
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.img-zoom img {
+  transition: transform 400ms ease-out;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Hero Ken Burns */
+.hero-ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
+
+/* Header scroll effect */
+.header-scrolled {
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 2px 20px rgba(43, 58, 103, 0.08);
+}
+
+/* === Respect prefers-reduced-motion === */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .link-animated::after {
+    transition: none;
+  }
+
+  .btn-animated {
+    transition: none;
+  }
+
+  .btn-animated:hover {
+    transform: none;
+  }
+
+  .img-zoom img {
+    transition: none;
+  }
+
+  .img-zoom:hover img {
+    transform: none;
+  }
+
+  .hero-ken-burns {
+    animation: none;
+  }
+
+  .header-scrolled {
+    transition: none;
+  }
+}

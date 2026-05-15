@@ -1,0 +1,140 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "training": "Entraînements",
+    "news": "Actualités et événements",
+    "board": "Conseil d'administration",
+    "sponsoring": "Sponsoring",
+    "contact": "Infos & Contacts"
+  },
+  "common": {
+    "address": "1 Route du Col-de-la-Luere, 69290 Grézieu-la-Varenne",
+    "phone": "07 78 26 65 24",
+    "email": "contact@asgrezieutennis.com",
+    "clubName": "Grézieu Tennis",
+    "skipToContent": "Aller au contenu principal",
+    "languageSelector": "Changer de langue",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "copyright": "© 2025 AS Grézieu Tennis. Tous droits réservés.",
+    "mapsLink": "Voir sur Google Maps",
+    "indoorCourts": "2 Courts Intérieurs",
+    "outdoorCourts": "2 Courts Extérieurs"
+  },
+  "pages": {
+    "home": {
+      "title": "Grézieu Tennis - Club de Tennis à Grézieu-la-Varenne",
+      "description": "Bienvenue au Tennis Club de Grézieu-la-Varenne. 2 courts intérieurs et 2 courts extérieurs.",
+      "hero": {
+        "heading": "Bienvenue au Tennis Club de Grézieu-la-Varenne",
+        "body": "Rejoignez notre club convivial pour des entraînements, des compétitions et des moments de partage."
+      },
+      "about": {
+        "heading": "Notre Club",
+        "body": "Le Tennis Club de Grézieu-la-Varenne vous accueille dans un cadre agréable avec 2 courts intérieurs et 2 courts extérieurs. Que vous soyez débutant ou compétiteur, venez partager notre passion du tennis."
+      },
+      "facilities": {
+        "heading": "Nos Installations",
+        "body": "Profitez de nos 4 courts de tennis : 2 courts intérieurs pour jouer toute l'année et 2 courts extérieurs pour profiter des beaux jours."
+      },
+      "contact": {
+        "heading": "Nous Contacter",
+        "body": "Venez nous rendre visite ou contactez-nous pour toute information sur les inscriptions et les activités du club."
+      }
+    },
+    "training": {
+      "title": "Entraînements - Grézieu Tennis",
+      "description": "Découvrez nos entraînements de tennis pour tous les niveaux à Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Entraînements",
+        "body": "Des cours adaptés à tous les niveaux, encadrés par des enseignants qualifiés."
+      },
+      "adults": {
+        "heading": "Cours Adultes",
+        "body": "Des créneaux adaptés pour les adultes, du débutant au compétiteur. Cours collectifs et individuels disponibles tout au long de la saison."
+      },
+      "youth": {
+        "heading": "École de Tennis",
+        "body": "Initiation et perfectionnement pour les jeunes de 4 à 18 ans. Mini-tennis, école de tennis et entraînement compétition."
+      },
+      "schedule": {
+        "heading": "Planning des Cours",
+        "body": "Les entraînements ont lieu du lundi au samedi. Contactez-nous pour connaître les créneaux disponibles."
+      }
+    },
+    "news": {
+      "title": "Actualités et Événements - Grézieu Tennis",
+      "description": "Suivez les actualités et événements du Tennis Club de Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Actualités et Événements",
+        "body": "Restez informé de la vie du club, des tournois et des événements à venir."
+      },
+      "tournaments": {
+        "heading": "Tournois",
+        "body": "Le club organise régulièrement des tournois internes et des compétitions homologuées FFT. Consultez le calendrier pour les prochaines dates."
+      },
+      "events": {
+        "heading": "Événements du Club",
+        "body": "Soirées, journées portes ouvertes, fête du club... Retrouvez toutes les animations qui rythment la vie de notre association."
+      }
+    },
+    "board": {
+      "title": "Conseil d'Administration - Grézieu Tennis",
+      "description": "Découvrez l'équipe dirigeante du Tennis Club de Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Conseil d'Administration",
+        "body": "L'équipe de bénévoles qui fait vivre le club au quotidien."
+      },
+      "team": {
+        "heading": "Notre Équipe",
+        "body": "Le conseil d'administration est composé de bénévoles passionnés qui œuvrent pour le développement du club et le bien-être de ses adhérents."
+      },
+      "roles": {
+        "heading": "Organisation",
+        "body": "Président, trésorier, secrétaire et membres du bureau se réunissent régulièrement pour piloter les activités du club et préparer les événements."
+      }
+    },
+    "sponsoring": {
+      "title": "Sponsoring - Grézieu Tennis",
+      "description": "Devenez partenaire du Tennis Club de Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Sponsoring",
+        "body": "Soutenez le club et gagnez en visibilité auprès de nos adhérents."
+      },
+      "partnership": {
+        "heading": "Devenir Partenaire",
+        "body": "En devenant partenaire du Tennis Club de Grézieu-la-Varenne, vous soutenez le sport local et bénéficiez d'une visibilité auprès de nos membres et visiteurs."
+      },
+      "benefits": {
+        "heading": "Avantages Partenaires",
+        "body": "Logo sur nos supports de communication, présence lors des événements, visibilité sur notre site web et nos réseaux sociaux."
+      }
+    },
+    "contact": {
+      "title": "Infos & Contacts - Grézieu Tennis",
+      "description": "Contactez le Tennis Club de Grézieu-la-Varenne. Adresse, téléphone et email.",
+      "hero": {
+        "heading": "Infos & Contacts",
+        "body": "Toutes les informations pour nous rejoindre ou nous contacter."
+      },
+      "info": {
+        "heading": "Nos Coordonnées",
+        "body": "N'hésitez pas à nous contacter pour toute question sur les inscriptions, les tarifs ou les activités du club."
+      },
+      "form": {
+        "heading": "Envoyez-nous un Message",
+        "nameLabel": "Nom",
+        "namePlaceholder": "Votre nom",
+        "emailLabel": "Email",
+        "emailPlaceholder": "votre@email.com",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Votre message...",
+        "submitButton": "Envoyer"
+      },
+      "access": {
+        "heading": "Accès au Club",
+        "body": "Le club est situé au 1 Route du Col-de-la-Luere, 69290 Grézieu-la-Varenne. Parking disponible sur place."
+      }
+    }
+  }
+}

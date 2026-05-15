@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/animations/ScrollReveal.astro';
+import { getTranslation } from '../../i18n/utils';
+
+const locale = 'en';
+const t = (key: string) => getTranslation(key, locale);
+---
+
+<BaseLayout title={t('pages.news.title')} description={t('pages.news.description')} locale={locale} currentPath="/en/news">
+  <section class="hero-page"><div class="container"><ScrollReveal animation="fade-in"><h1>{t('pages.news.hero.heading')}</h1><p class="hero-text">{t('pages.news.hero.body')}</p></ScrollReveal></div></section>
+  <section class="section"><div class="container cards-grid">
+    <ScrollReveal animation="slide-up" delay={1}><article class="card card-hover"><div class="card-accent"></div><h2>{t('pages.news.tournaments.heading')}</h2><p>{t('pages.news.tournaments.body')}</p></article></ScrollReveal>
+    <ScrollReveal animation="slide-up" delay={2}><article class="card card-hover"><div class="card-accent"></div><h2>{t('pages.news.events.heading')}</h2><p>{t('pages.news.events.body')}</p></article></ScrollReveal>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .hero-page{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-dark) 100%);color:#fff;padding:var(--spacing-3xl) 0;text-align:center}
+  .hero-page h1{color:#fff;margin-bottom:var(--spacing-md)}
+  .hero-text{font-size:var(--font-size-lg);color:rgba(255,255,255,.9);max-width:600px;margin:0 auto}
+  .section{padding:var(--spacing-3xl) 0}
+  .cards-grid{display:grid;grid-template-columns:1fr;gap:var(--spacing-lg)}
+  @media(min-width:768px){.cards-grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--color-background);border:1px solid var(--color-border);border-radius:var(--border-radius);padding:var(--spacing-xl);position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(43,58,103,.06)}
+  .card-accent{position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--color-primary),var(--color-secondary))}
+  .card h2{font-size:var(--font-size-xl);color:var(--color-primary);margin-bottom:var(--spacing-sm);padding-left:var(--spacing-md)}
+  .card p{padding-left:var(--spacing-md)}
+</style>

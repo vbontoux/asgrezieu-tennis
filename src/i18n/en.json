@@ -1,0 +1,140 @@
+{
+  "nav": {
+    "home": "Home",
+    "training": "Training",
+    "news": "News & Events",
+    "board": "Board",
+    "sponsoring": "Sponsoring",
+    "contact": "Info & Contact"
+  },
+  "common": {
+    "address": "1 Route du Col-de-la-Luere, 69290 Grézieu-la-Varenne",
+    "phone": "07 78 26 65 24",
+    "email": "contact@asgrezieutennis.com",
+    "clubName": "Grézieu Tennis",
+    "skipToContent": "Skip to main content",
+    "languageSelector": "Change language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "copyright": "© 2025 AS Grézieu Tennis. All rights reserved.",
+    "mapsLink": "View on Google Maps",
+    "indoorCourts": "2 Indoor Courts",
+    "outdoorCourts": "2 Outdoor Courts"
+  },
+  "pages": {
+    "home": {
+      "title": "Grézieu Tennis - Tennis Club in Grézieu-la-Varenne",
+      "description": "Welcome to the Tennis Club of Grézieu-la-Varenne. 2 indoor courts and 2 outdoor courts.",
+      "hero": {
+        "heading": "Welcome to the Tennis Club of Grézieu-la-Varenne",
+        "body": "Join our friendly club for training, competitions and shared moments."
+      },
+      "about": {
+        "heading": "Our Club",
+        "body": "The Tennis Club of Grézieu-la-Varenne welcomes you in a pleasant setting with 2 indoor courts and 2 outdoor courts. Whether you are a beginner or a competitor, come share our passion for tennis."
+      },
+      "facilities": {
+        "heading": "Our Facilities",
+        "body": "Enjoy our 4 tennis courts: 2 indoor courts to play all year round and 2 outdoor courts to enjoy the sunny days."
+      },
+      "contact": {
+        "heading": "Contact Us",
+        "body": "Come visit us or contact us for any information about memberships and club activities."
+      }
+    },
+    "training": {
+      "title": "Training - Grézieu Tennis",
+      "description": "Discover our tennis training for all levels in Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Training",
+        "body": "Lessons adapted to all levels, supervised by qualified coaches."
+      },
+      "adults": {
+        "heading": "Adult Lessons",
+        "body": "Adapted time slots for adults, from beginner to competitor. Group and individual lessons available throughout the season."
+      },
+      "youth": {
+        "heading": "Tennis School",
+        "body": "Introduction and improvement for young players aged 4 to 18. Mini-tennis, tennis school and competition training."
+      },
+      "schedule": {
+        "heading": "Lesson Schedule",
+        "body": "Training takes place Monday to Saturday. Contact us to find out about available time slots."
+      }
+    },
+    "news": {
+      "title": "News & Events - Grézieu Tennis",
+      "description": "Follow the news and events of the Tennis Club of Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "News & Events",
+        "body": "Stay informed about club life, tournaments and upcoming events."
+      },
+      "tournaments": {
+        "heading": "Tournaments",
+        "body": "The club regularly organises internal tournaments and FFT-approved competitions. Check the calendar for upcoming dates."
+      },
+      "events": {
+        "heading": "Club Events",
+        "body": "Evenings, open days, club celebrations... Find all the activities that bring our association to life."
+      }
+    },
+    "board": {
+      "title": "Board - Grézieu Tennis",
+      "description": "Discover the management team of the Tennis Club of Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Board of Directors",
+        "body": "The team of volunteers who bring the club to life every day."
+      },
+      "team": {
+        "heading": "Our Team",
+        "body": "The board of directors is made up of passionate volunteers who work for the development of the club and the well-being of its members."
+      },
+      "roles": {
+        "heading": "Organisation",
+        "body": "President, treasurer, secretary and board members meet regularly to manage club activities and prepare events."
+      }
+    },
+    "sponsoring": {
+      "title": "Sponsoring - Grézieu Tennis",
+      "description": "Become a partner of the Tennis Club of Grézieu-la-Varenne.",
+      "hero": {
+        "heading": "Sponsoring",
+        "body": "Support the club and gain visibility among our members."
+      },
+      "partnership": {
+        "heading": "Become a Partner",
+        "body": "By becoming a partner of the Tennis Club of Grézieu-la-Varenne, you support local sport and benefit from visibility among our members and visitors."
+      },
+      "benefits": {
+        "heading": "Partner Benefits",
+        "body": "Logo on our communication materials, presence at events, visibility on our website and social media."
+      }
+    },
+    "contact": {
+      "title": "Info & Contact - Grézieu Tennis",
+      "description": "Contact the Tennis Club of Grézieu-la-Varenne. Address, phone and email.",
+      "hero": {
+        "heading": "Info & Contact",
+        "body": "All the information to join us or get in touch."
+      },
+      "info": {
+        "heading": "Our Details",
+        "body": "Don't hesitate to contact us for any questions about memberships, fees or club activities."
+      },
+      "form": {
+        "heading": "Send Us a Message",
+        "nameLabel": "Name",
+        "namePlaceholder": "Your name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "your@email.com",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Your message...",
+        "submitButton": "Send"
+      },
+      "access": {
+        "heading": "Getting to the Club",
+        "body": "The club is located at 1 Route du Col-de-la-Luere, 69290 Grézieu-la-Varenne. Parking available on site."
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/animations/ScrollReveal.astro';
+import { getTranslation } from '../../i18n/utils';
+
+const locale = 'en';
+const t = (key: string) => getTranslation(key, locale);
+---
+
+<BaseLayout title={t('pages.contact.title')} description={t('pages.contact.description')} locale={locale} currentPath="/en/contact">
+  <section class="hero-page"><div class="container"><ScrollReveal animation="fade-in"><h1>{t('pages.contact.hero.heading')}</h1><p class="hero-text">{t('pages.contact.hero.body')}</p></ScrollReveal></div></section>
+
+  <section class="section"><div class="container contact-grid">
+    <ScrollReveal animation="slide-right">
+      <div>
+        <h2>{t('pages.contact.info.heading')}</h2>
+        <p>{t('pages.contact.info.body')}</p>
+        <dl class="contact-details">
+          <dt>Email</dt><dd><a href={`mailto:${t('common.email')}`} class="link-animated">{t('common.email')}</a></dd>
+          <dt>Phone</dt><dd><a href={`tel:${t('common.phone').replace(/\s/g, '')}`} class="link-animated">{t('common.phone')}</a></dd>
+          <dt>Address</dt><dd><a href="https://www.google.com/maps/place/1+Route+du+Col-de-la-Luere,+69290+Gr%C3%A9zieu-la-Varenne" target="_blank" rel="noopener noreferrer" class="link-animated">{t('common.address')}</a></dd>
+        </dl>
+      </div>
+    </ScrollReveal>
+    <ScrollReveal animation="slide-left">
+      <div class="form-wrapper">
+        <h2>{t('pages.contact.form.heading')}</h2>
+        <form class="contact-form" action="#" method="post">
+          <div class="form-group"><label for="name">{t('pages.contact.form.nameLabel')}</label><input type="text" id="name" name="name" placeholder={t('pages.contact.form.namePlaceholder')} required /></div>
+          <div class="form-group"><label for="email">{t('pages.contact.form.emailLabel')}</label><input type="email" id="email" name="email" placeholder={t('pages.contact.form.emailPlaceholder')} required /></div>
+          <div class="form-group"><label for="message">{t('pages.contact.form.messageLabel')}</label><textarea id="message" name="message" rows="5" placeholder={t('pages.contact.form.messagePlaceholder')} required></textarea></div>
+          <button type="submit" class="submit-btn btn-animated">{t('pages.contact.form.submitButton')}</button>
+        </form>
+      </div>
+    </ScrollReveal>
+  </div></section>
+
+  <section class="section section-gradient"><div class="container"><ScrollReveal animation="slide-up"><h2>{t('pages.contact.access.heading')}</h2><p class="section-text">{t('pages.contact.access.body')}</p></ScrollReveal></div></section>
+</BaseLayout>
+
+<style>
+  .hero-page{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-dark) 100%);color:#fff;padding:var(--spacing-3xl) 0;text-align:center}
+  .hero-page h1{color:#fff;margin-bottom:var(--spacing-md)}
+  .hero-text{font-size:var(--font-size-lg);color:rgba(255,255,255,.9);max-width:600px;margin:0 auto}
+  .section{padding:var(--spacing-3xl) 0}
+  .section-gradient{background:linear-gradient(180deg,var(--color-background-alt) 0%,var(--color-background) 100%)}
+  .section-text{font-size:var(--font-size-lg);color:var(--color-text-light);max-width:700px;line-height:1.8}
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:var(--spacing-3xl)}
+  @media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .contact-details{margin-top:var(--spacing-lg)}
+  .contact-details dt{font-weight:700;color:var(--color-primary);margin-top:var(--spacing-md);font-size:var(--font-size-sm);text-transform:uppercase;letter-spacing:.5px}
+  .contact-details dd{margin-left:0;margin-top:var(--spacing-xs)}
+  .form-wrapper{background:var(--color-background-alt);padding:var(--spacing-xl);border-radius:var(--border-radius)}
+  .contact-form{display:flex;flex-direction:column;gap:var(--spacing-md);margin-top:var(--spacing-md)}
+  .form-group{display:flex;flex-direction:column;gap:var(--spacing-xs)}
+  .form-group label{font-weight:600;font-size:var(--font-size-sm);color:var(--color-text)}
+  .form-group input,.form-group textarea{padding:var(--spacing-sm) var(--spacing-md);border:1px solid var(--color-border);border-radius:var(--border-radius);font-size:var(--font-size-base);font-family:inherit;min-height:44px;transition:border-color 200ms ease,box-shadow 200ms ease}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(43,58,103,.1);outline:none}
+  .submit-btn{padding:var(--spacing-sm) var(--spacing-xl);background-color:var(--color-primary);color:#fff;border:none;border-radius:var(--border-radius);font-size:var(--font-size-base);font-weight:600;cursor:pointer;min-height:44px}
+  .submit-btn:hover{background-color:var(--color-secondary)}
+</style>

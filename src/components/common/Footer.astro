@@ -1,0 +1,110 @@
+---
+import { getTranslation, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-section">
+      <h2 class="footer-heading">{getTranslation('common.clubName', locale)}</h2>
+      <address class="footer-address">
+        <a
+          href="https://www.google.com/maps/place/1+Route+du+Col-de-la-Luere,+69290+Gr%C3%A9zieu-la-Varenne"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={getTranslation('common.mapsLink', locale)}
+        >
+          {getTranslation('common.address', locale)}
+        </a>
+      </address>
+    </div>
+
+    <div class="footer-section">
+      <h2 class="footer-heading">Contact</h2>
+      <ul class="footer-contact-list">
+        <li>
+          <a href={`mailto:${getTranslation('common.email', locale)}`}>
+            {getTranslation('common.email', locale)}
+          </a>
+        </li>
+        <li>
+          <a href={`tel:${getTranslation('common.phone', locale).replace(/\s/g, '')}`}>
+            {getTranslation('common.phone', locale)}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>{getTranslation('common.copyright', locale)}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    padding-top: var(--spacing-3xl);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .footer-heading {
+    font-size: var(--font-size-lg);
+    color: #ffffff;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-address {
+    font-style: normal;
+  }
+
+  .footer-address a,
+  .footer-contact-list a {
+    color: rgba(255, 255, 255, 0.9);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-address a:hover,
+  .footer-contact-list a:hover {
+    color: #ffffff;
+  }
+
+  .footer-contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-md) 0;
+  }
+
+  .footer-bottom p {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 0;
+  }
+</style>
