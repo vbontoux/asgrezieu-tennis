@@ -3,60 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../components/animations/ScrollReveal.astro';
 
 const locale = 'fr';
-
-const planning = {
-  lundi: [
-    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Cédric' },
-    { time: '16H45 - 18H', label: '8/10 ANS', coach: 'Cédric' },
-    { time: '18H - 19H', label: 'ADULTES DÉBUTANT', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'JEUNES', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'DAMES (CCVL)', coach: 'Olivier' },
-    { time: '20H30 - 22H', label: 'DAMES', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'DAMES (CCVL)', coach: 'Olivier' },
-  ],
-  mardi: [
-    { time: '17H30 - 19H', label: '11/13 ANS (NC à 30/4)', coach: 'Olivier' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Olivier' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Olivier' },
-  ],
-  mercredi: [
-    { time: '13H - 14H30', label: '2015-2019', coach: 'Cédric et Olivier' },
-    { time: '14H30 - 16H', label: '2013-2016', coach: 'Cédric et Olivier' },
-    { time: '16H - 17H30', label: '2011-2014', coach: 'Cédric et Olivier' },
-    { time: '17H30 - 19H', label: '2008-2012', coach: 'Cédric et Olivier' },
-    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric et Olivier' },
-  ],
-  jeudi: [
-    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Olivier' },
-    { time: '17H30 - 19H', label: '13/16 ANS (40 à 30/4)', coach: 'Cédric' },
-    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
-    { time: '20H30 - 22H', label: 'ADULTES MIXTE', coach: 'Cédric' },
-  ],
-  vendredi: [
-    { time: '17H30 - 19H', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
-    { time: '20H30 - 21H30', label: 'ADULTES MIXTE', coach: 'Olivier' },
-  ],
-  samedi: [
-    { time: '9H - 10H30', label: '2015-2019', coach: 'Cédric et Michael' },
-    { time: '10H30 - 12H', label: '2012-2016', coach: 'Cédric et Michael' },
-    { time: '12H - 13H30', label: '2008-2011', coach: 'Cédric et Michael' },
-    { time: '9H - 10H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-    { time: '10H - 11H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-    { time: '11H - 12H15', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
-  ],
-};
-
-const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] as const;
-const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi: 'JEUDI', vendredi: 'VENDREDI', samedi: 'SAMEDI' };
 ---
 
 <BaseLayout
   title="Actualités et Événements - Grézieu Tennis"
-  description="Créneaux d'entraînement du Tennis Club de Grézieu-la-Varenne. Planning hebdomadaire."
+  description="Actualités du Tennis Club de Grézieu-la-Varenne. Tournois, événements et nouveautés."
   locale={locale}
   currentPath="/fr/actualites"
 >
@@ -65,29 +16,42 @@ const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi:
       <div class="container">
         <ScrollReveal animation="fade-in">
           <div class="section-header">
-            <h1>Créneaux d'Entraînement</h1>
+            <h1>Actualités du Club</h1>
             <div class="title-separator"></div>
           </div>
         </ScrollReveal>
 
-        <ScrollReveal animation="slide-up">
-          <div class="planning-grid">
-            {days.map(day => (
-              <div class="day-column">
-                <h2 class="day-title">{dayLabels[day]}</h2>
-                <div class="slots">
-                  {planning[day].map(slot => (
-                    <div class:list={['slot-card', { 'slot-alt': (slot as any).alt }]}>
-                      <span class="slot-time">{slot.time}</span>
-                      <span class="slot-label">{slot.label}</span>
-                      <span class="slot-coach">{slot.coach}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
+        <div class="news-grid">
+          <ScrollReveal animation="slide-up" delay={1}>
+            <article class="news-card card-hover">
+              <div class="news-badge">🎾 Tournoi</div>
+              <h2>Tournoi Open — 2 au 25 avril</h2>
+              <p>Cette année, le Tournoi Open revient du 2 au 25 avril !</p>
+              <p>Que vous soyez compétiteur ou amateur, venez vous challenger sur les courts dans une ambiance conviviale !</p>
+              <p class="news-cta">
+                <strong>Inscription et règlement via Ten'Up :</strong><br/>
+                <a href="https://tenup.fft.fr/tournoi/189908" target="_blank" rel="noopener noreferrer" class="news-link">
+                  tenup.fft.fr/tournoi/189908 →
+                </a>
+              </p>
+              <p class="news-footer">On vous attend nombreux !</p>
+            </article>
+          </ScrollReveal>
+
+          <ScrollReveal animation="slide-up" delay={2}>
+            <article class="news-card card-hover">
+              <div class="news-badge">🎾 Nouveau</div>
+              <h2>Location de terrains ouverte à tous</h2>
+              <p>Le Club ouvre désormais la location horaire de ses terrains aux non-adhérents et non-licenciés !</p>
+              <p class="news-cta">
+                <strong>Réservez sur Anybuddy :</strong><br/>
+                <a href="https://www.anybuddyapp.com/club-grezieu-tennis-as/reservation/tennis?activity=tennis" target="_blank" rel="noopener noreferrer" class="news-link">
+                  anybuddyapp.com — Réserver un court →
+                </a>
+              </p>
+            </article>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   </div>
@@ -101,84 +65,14 @@ const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi:
   .section-header h1 { color: #ffffff; font-size: clamp(28px, 4vw, 44px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-md); }
   .title-separator { width: 80px; height: 3px; background-color: #c9a84c; margin: 0 auto; }
 
-  .planning-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: var(--spacing-sm);
-    overflow-x: auto;
-  }
+  .news-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl); max-width: 800px; margin: 0 auto; }
 
-  .day-column {
-    min-width: 150px;
-  }
-
-  .day-title {
-    text-align: center;
-    font-size: var(--font-size-sm);
-    font-weight: 800;
-    color: #ffffff;
-    padding: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .slots {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-  }
-
-  .slot-card {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    padding: var(--spacing-sm);
-    text-align: center;
-    transition: background 200ms ease, transform 200ms ease;
-  }
-
-  .slot-card:hover {
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-2px);
-  }
-
-  .slot-alt {
-    background: rgba(201, 168, 76, 0.15);
-    border-color: rgba(201, 168, 76, 0.3);
-  }
-
-  .slot-time {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 4px;
-  }
-
-  .slot-label {
-    display: block;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-
-  .slot-coach {
-    display: block;
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    font-style: italic;
-  }
-
-  @media (max-width: 768px) {
-    .planning-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .planning-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+  .news-card { background: #ffffff; border-radius: 12px; padding: var(--spacing-2xl); box-shadow: 0 4px 24px rgba(0,0,0,.2); border-left: 5px solid var(--color-primary); }
+  .news-badge { display: inline-block; font-size: var(--font-size-sm); font-weight: 600; color: var(--color-primary); margin-bottom: var(--spacing-md); }
+  .news-card h2 { font-size: var(--font-size-xl); color: #1e2a4a; margin-bottom: var(--spacing-md); }
+  .news-card p { font-size: var(--font-size-base); color: var(--color-text); line-height: 1.7; margin-bottom: var(--spacing-sm); }
+  .news-cta { margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--color-background-alt); border-radius: var(--border-radius); }
+  .news-link { color: var(--color-primary); font-weight: 600; word-break: break-all; }
+  .news-link:hover { color: var(--color-secondary); }
+  .news-footer { font-weight: 600; color: var(--color-primary); margin-top: var(--spacing-md); }
 </style>

@@ -65,8 +65,17 @@ const t = (key: string) => getTranslation(key, locale);
   <section class="section section-gradient">
     <div class="container">
       <ScrollReveal animation="slide-up">
-        <h2>{t('pages.contact.access.heading')}</h2>
-        <p class="section-text">{t('pages.contact.access.body')}</p>
+        <h2>Se Rendre au Club</h2>
+        <div class="access-grid">
+          <div class="access-card">
+            <h3>🚗 En voiture</h3>
+            <p>Rte du Col-de-la-Luere, 69290 Grézieu-la-Varenne<br/>(À la sortie du rond-point du Tupinier à Craponne)</p>
+          </div>
+          <div class="access-card">
+            <h3>🚌 En transports en commun</h3>
+            <p>Ligne C24 (arrêt Stade E.Catalon) puis 2min à pieds<br/>Ligne 247 (arrêt Tupinier) puis 5min à pieds</p>
+          </div>
+        </div>
       </ScrollReveal>
     </div>
   </section>
@@ -92,4 +101,9 @@ const t = (key: string) => getTranslation(key, locale);
   .form-group input:focus, .form-group textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(43,58,103,0.1); outline: none; }
   .submit-btn { padding: var(--spacing-sm) var(--spacing-xl); background-color: var(--color-primary); color: #ffffff; border: none; border-radius: var(--border-radius); font-size: var(--font-size-base); font-weight: 600; cursor: pointer; min-height: 44px; }
   .submit-btn:hover { background-color: var(--color-secondary); }
+  .access-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); margin-top: var(--spacing-lg); }
+  @media (min-width: 768px) { .access-grid { grid-template-columns: 1fr 1fr; } }
+  .access-card { background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--spacing-lg); }
+  .access-card h3 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--color-primary); }
+  .access-card p { font-size: var(--font-size-base); line-height: 1.7; color: var(--color-text); }
 </style>

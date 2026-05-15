@@ -1,67 +1,154 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../components/animations/ScrollReveal.astro';
-import { getTranslation } from '../../i18n/utils';
 
 const locale = 'fr';
-const t = (key: string) => getTranslation(key, locale);
+
+const coachs = [
+  { name: 'BIDON Cédric', role: 'Coach', diplome: 'DEJEPS' },
+  { name: 'PASSOT Olivier', role: 'Coach', diplome: 'DEJEPS' },
+  { name: 'HUNAULT Clément', role: 'Coach', diplome: 'CQP' },
+  { name: 'LAGARDE Michael', role: 'Coach', diplome: '' },
+];
+
+const planning = {
+  lundi: [
+    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Cédric' },
+    { time: '16H45 - 18H', label: '8/10 ANS', coach: 'Cédric' },
+    { time: '18H - 19H', label: 'ADULTES DÉBUTANT', coach: 'Cédric' },
+    { time: '19H - 20H30', label: 'JEUNES', coach: 'Cédric' },
+    { time: '19H - 20H30', label: 'DAMES (CCVL)', coach: 'Olivier' },
+    { time: '20H30 - 22H', label: 'DAMES', coach: 'Cédric' },
+    { time: '20H30 - 22H', label: 'DAMES (CCVL)', coach: 'Olivier' },
+  ],
+  mardi: [
+    { time: '17H30 - 19H', label: '11/13 ANS (NC à 30/4)', coach: 'Olivier' },
+    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
+    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Olivier' },
+    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric' },
+    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Olivier' },
+  ],
+  mercredi: [
+    { time: '13H - 14H30', label: '2015-2019', coach: 'Cédric et Olivier' },
+    { time: '14H30 - 16H', label: '2013-2016', coach: 'Cédric et Olivier' },
+    { time: '16H - 17H30', label: '2011-2014', coach: 'Cédric et Olivier' },
+    { time: '17H30 - 19H', label: '2008-2012', coach: 'Cédric et Olivier' },
+    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
+    { time: '20H30 - 22H', label: 'MESSIEURS', coach: 'Cédric et Olivier' },
+  ],
+  jeudi: [
+    { time: '9H - 10H', label: 'ADULTES MIXTE', coach: 'Olivier' },
+    { time: '17H30 - 19H', label: '13/16 ANS (40 à 30/4)', coach: 'Cédric' },
+    { time: '19H - 20H30', label: 'MESSIEURS', coach: 'Cédric' },
+    { time: '20H30 - 22H', label: 'ADULTES MIXTE', coach: 'Cédric' },
+  ],
+  vendredi: [
+    { time: '17H30 - 19H', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
+    { time: '19H - 20H30', label: 'ADULTES MIXTE', coach: 'Cédric et Olivier' },
+    { time: '20H30 - 21H30', label: 'ADULTES MIXTE', coach: 'Olivier' },
+  ],
+  samedi: [
+    { time: '9H - 10H30', label: '2015-2019', coach: 'Cédric et Michael' },
+    { time: '10H30 - 12H', label: '2012-2016', coach: 'Cédric et Michael' },
+    { time: '12H - 13H30', label: '2008-2011', coach: 'Cédric et Michael' },
+    { time: '9H - 10H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
+    { time: '10H - 11H', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
+    { time: '11H - 12H15', label: 'MINI-TENNIS (E.Catalon)', coach: 'Olivier et Clément', alt: true },
+  ],
+};
+
+const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] as const;
+const dayLabels = { lundi: 'LUNDI', mardi: 'MARDI', mercredi: 'MERCREDI', jeudi: 'JEUDI', vendredi: 'VENDREDI', samedi: 'SAMEDI' };
 ---
 
 <BaseLayout
-  title={t('pages.training.title')}
-  description={t('pages.training.description')}
+  title="Entraînements - Grézieu Tennis"
+  description="Coachs et créneaux d'entraînement du Tennis Club de Grézieu-la-Varenne."
   locale={locale}
   currentPath="/fr/entrainements"
 >
-  <section class="hero-page">
-    <div class="container">
-      <ScrollReveal animation="fade-in">
-        <h1>{t('pages.training.hero.heading')}</h1>
-        <p class="hero-text">{t('pages.training.hero.body')}</p>
-      </ScrollReveal>
-    </div>
-  </section>
+  <div class="page-dark">
+    <!-- Coachs -->
+    <section class="section">
+      <div class="container">
+        <ScrollReveal animation="fade-in">
+          <div class="section-header">
+            <h1>Coachs</h1>
+            <div class="title-separator"></div>
+          </div>
+        </ScrollReveal>
+        <div class="coachs-grid">
+          {coachs.map((coach, i) => (
+            <ScrollReveal animation="scale-in" delay={((i + 1) as 1 | 2 | 3 | 4)}>
+              <div class="coach-card card-hover">
+                <h2 class="coach-name">{coach.name}</h2>
+                <p class="coach-role">{coach.role}</p>
+                {coach.diplome && <span class="coach-badge">{coach.diplome}</span>}
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
 
-  <section class="section">
-    <div class="container cards-grid">
-      <ScrollReveal animation="slide-up" delay={1}>
-        <article class="card card-hover">
-          <div class="card-accent"></div>
-          <h2>{t('pages.training.adults.heading')}</h2>
-          <p>{t('pages.training.adults.body')}</p>
-        </article>
-      </ScrollReveal>
-      <ScrollReveal animation="slide-up" delay={2}>
-        <article class="card card-hover">
-          <div class="card-accent"></div>
-          <h2>{t('pages.training.youth.heading')}</h2>
-          <p>{t('pages.training.youth.body')}</p>
-        </article>
-      </ScrollReveal>
-    </div>
-  </section>
+    <!-- Planning -->
+    <section class="section">
+      <div class="container">
+        <ScrollReveal animation="fade-in">
+          <div class="section-header">
+            <h2 class="section-title-white">Créneaux d'Entraînement</h2>
+            <div class="title-separator"></div>
+          </div>
+        </ScrollReveal>
 
-  <section class="section section-gradient">
-    <div class="container">
-      <ScrollReveal animation="slide-up">
-        <h2>{t('pages.training.schedule.heading')}</h2>
-        <p class="section-text">{t('pages.training.schedule.body')}</p>
-      </ScrollReveal>
-    </div>
-  </section>
+        <ScrollReveal animation="slide-up">
+          <div class="planning-grid">
+            {days.map(day => (
+              <div class="day-column">
+                <h3 class="day-title">{dayLabels[day]}</h3>
+                <div class="slots">
+                  {planning[day].map(slot => (
+                    <div class:list={['slot-card', { 'slot-alt': (slot as any).alt }]}>
+                      <span class="slot-time">{slot.time}</span>
+                      <span class="slot-label">{slot.label}</span>
+                      <span class="slot-coach">{slot.coach}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
+<style is:global>body:has(.page-dark){background-color:#1e2a4a;}</style>
 <style>
-  .hero-page { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%); color: #ffffff; padding: var(--spacing-3xl) 0; text-align: center; }
-  .hero-page h1 { color: #ffffff; margin-bottom: var(--spacing-md); }
-  .hero-text { font-size: var(--font-size-lg); color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto; }
-  .section { padding: var(--spacing-3xl) 0; }
-  .section-gradient { background: linear-gradient(180deg, var(--color-background-alt) 0%, var(--color-background) 100%); }
-  .section-text { font-size: var(--font-size-lg); color: var(--color-text-light); max-width: 700px; line-height: 1.8; }
-  .cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-lg); }
-  @media (min-width: 768px) { .cards-grid { grid-template-columns: 1fr 1fr; } }
-  .card { background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--spacing-xl); position: relative; overflow: hidden; box-shadow: 0 2px 8px rgba(43,58,103,0.06); }
-  .card-accent { position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--color-primary), var(--color-secondary)); }
-  .card h2 { font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--spacing-sm); padding-left: var(--spacing-md); }
-  .card p { padding-left: var(--spacing-md); }
+  .page-dark { background-color: #1e2a4a; padding-top: var(--spacing-xl); padding-bottom: var(--spacing-3xl); }
+  .section { padding: var(--spacing-2xl) 0; }
+  .section-header { text-align: center; margin-bottom: var(--spacing-2xl); }
+  .section-header h1, .section-title-white { color: #ffffff; font-size: clamp(28px, 4vw, 44px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-md); }
+  .title-separator { width: 80px; height: 3px; background-color: #c9a84c; margin: 0 auto; }
+
+  .coachs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-lg); max-width: 900px; margin: 0 auto; }
+  .coach-card { text-align: center; padding: var(--spacing-xl); background: #ffffff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); }
+  .coach-name { font-size: var(--font-size-lg); font-weight: 700; color: #1e2a4a; margin-bottom: var(--spacing-xs); }
+  .coach-role { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-sm); }
+  .coach-badge { display: inline-block; padding: 4px 12px; background: var(--color-primary); color: #ffffff; font-size: 11px; font-weight: 700; border-radius: 50px; text-transform: uppercase; }
+
+  .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--spacing-sm); overflow-x: auto; }
+  .day-column { min-width: 150px; }
+  .day-title { text-align: center; font-size: var(--font-size-sm); font-weight: 800; color: #ffffff; padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 2px solid rgba(255,255,255,.2); }
+  .slots { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .slot-card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: var(--spacing-sm); text-align: center; transition: background 200ms ease, transform 200ms ease; }
+  .slot-card:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+  .slot-alt { background: rgba(201,168,76,.15); border-color: rgba(201,168,76,.3); }
+  .slot-time { display: block; font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+  .slot-label { display: block; font-size: 11px; color: rgba(255,255,255,.85); font-weight: 500; margin-bottom: 2px; }
+  .slot-coach { display: block; font-size: 10px; color: rgba(255,255,255,.5); font-style: italic; }
+
+  @media (max-width: 768px) { .planning-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .planning-grid { grid-template-columns: 1fr; } }
 </style>
